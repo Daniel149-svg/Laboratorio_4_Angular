@@ -8,7 +8,7 @@ import { Observable } from 'rxjs';
 })
 
 export class DataService {
-  private url = 'https://daniel-trujillo-ing-default-rtdb.firebaseio.com/naviedad.json';
+  private url = 'https://daniel-trujillo-ing-default-rtdb.firebaseio.com/navidad.json';
 
   constructor(private http: HttpClient) {}
 
@@ -16,6 +16,7 @@ export class DataService {
   agregarVehiculo(vehiculo: vehiculo): Observable<any> {
     return this.http.post(this.url, vehiculo);
   }
+
 
   // Método para obtener todos los vehículos
   obtenerVehiculos(): Observable<vehiculo[]> {
