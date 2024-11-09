@@ -1,58 +1,56 @@
-import { Injectable } from '@angular/core';
-import { ServicioVehiculoService } from './servicio-vehiculo.service';
-import { vehiculo } from './vehiculo.models';
+      import { Injectable } from '@angular/core';
+      import { ServicioVehiculoService } from './servicio-vehiculo.service';
+      import { vehiculo } from './vehiculo.models';
+      import { DataService } from './data.service';
 
+      @Injectable({
+        providedIn: 'root'
+      })
+      export class vehiculosService {
 
-@Injectable({
-  providedIn: 'root'
-})
+        vehiculos: vehiculo[]=[];
 
-export class vehiculosService{
+        encontar_vehiculo(indice: any): vehiculo {
+          throw new Error('Method not implemented.');
+        }
+        eliminarVehiculo(vehiculoId: number) {
+          throw new Error('Method not implemented.');
+        }
+        vehiculo: vehiculo[] = [];
 
-        vehiculo: vehiculo[]=[
-          new vehiculo('Subaru', 'J10', 'M1000', 'Blanco', 'Standar', 1999, 3000),
-          new vehiculo('Bugatti', 'Chiron', 'W16', 'Negro', 'Automático', 2021, 30000),
-          new vehiculo('Ferrari', '488 Pista', 'F142M', 'Rojo', 'Standar', 2022, 30000),
-          
-        ];
+        constructor(
+          private servicioMensaje: ServicioVehiculoService,
+          private dataService: DataService
+        ) {}
 
-        constructor(private servicioMensaje: ServicioVehiculoService){}
-
-        agregar_vehiculo_servicio(vehiculo:vehiculo){
-            this.servicioMensaje.muestra_mensaje("Nombre Ingresado: "
-                + vehiculo.marca);
-                
+        agregar_vehiculo_servicio(vehiculo: vehiculo) {
+          this.servicioMensaje.muestra_mensaje('Nombre Ingresado: ' + vehiculo.marca);
+          this.dataService.agregarVehiculo(vehiculo).subscribe((respuesta) => {
+            console.log('Vehículo agregado:', respuesta);
             this.vehiculo.push(vehiculo);
+          });
         }
-        
+
         eliminar_vehiculo_servicio(indice: number) {
-          if (indice > -1) {
+          const vehiculoId = "eliminar"; 
+          this.dataService.eliminarVehiculo(vehiculoId).subscribe(() => {
             this.vehiculo.splice(indice, 1);
-          }
+            console.log(`Vehículo en índice ${indice} eliminado.`);
+          });
         }
 
-      
-        encontar_vehiculo(indice: number){
-          let vehiculo: vehiculo = this.vehiculo[indice];
-          return vehiculo;
+        // Método para cargar los vehículos desde Firebase
+        cargarVehiculos() {
+          this.dataService.obtenerVehiculos().subscribe((vehiculos) => {
+            this.vehiculo = vehiculos;
+          });
         }
 
-        actualizar_vehiculo(indice: number, vehiculo:vehiculo){
-          let vehiculoModificar = this.vehiculo[indice];
-          vehiculoModificar.marca = vehiculo.marca;
-          vehiculoModificar.modelo = vehiculo.modelo;
-          vehiculoModificar.Nmotor = vehiculo.Nmotor;
-          vehiculoModificar.color = vehiculo.color;
-          vehiculoModificar.trasmicion = vehiculo.trasmicion;
-          vehiculoModificar.anio = vehiculo.anio;
-          vehiculoModificar.valor = vehiculo.valor;
+        actualizar_vehiculo(indice: number, vehiculo: vehiculo) {
+          const vehiculoId = "actualizar"; 
+          this.dataService.actualizarVehiculo(vehiculoId, vehiculo).subscribe(() => {
+            console.log(`Vehículo en índice ${indice} actualizado en Firebase.`);
+            this.vehiculo[indice] = vehiculo;
+          });
         }
-
-        eliminarVehiculo(indice: number): void {
-          this.vehiculo.splice(indice, 1);
-        }
-      
-        getVehiculos(): any[] {
-          return this.vehiculo;
-        }        
-}
+      }
