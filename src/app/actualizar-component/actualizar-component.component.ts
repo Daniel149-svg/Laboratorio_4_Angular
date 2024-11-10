@@ -54,7 +54,7 @@ ngOnInit(): void {
 }
 
   actualizar_vehiculo(){
-    
+    //if
     let miVehiculo = new vehiculo(this.cuadroMarca, this.cuadroModelo, this.cuadroNmotor, this.cuadroColor, this.cuadroTrasmicion, this.cuadroAnio, this.cuadroValor);
 
    this.vehiculosService.actualizar_vehiculo(this.indice, miVehiculo);

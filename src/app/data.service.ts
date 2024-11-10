@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { vehiculo } from './vehiculo.models';
-import { Observable } from 'rxjs';
+import { map, Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -19,8 +19,10 @@ export class DataService {
   }
 
   // Método para obtener todos los vehículos
-  obtenerVehiculos(): Observable<vehiculo[]> {
-    return this.http.get<vehiculo[]>(this.url);
+  obtenerVehiculos(): Observable<vehiculo[]> {  
+    return this.http.get<vehiculo[]>(this.url).pipe(  
+      map((data) => Object.values(data)) // Convierte el objeto en un arreglo  
+    );  
   }
 
   // Método para actualizar un vehículo

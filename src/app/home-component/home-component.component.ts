@@ -37,7 +37,14 @@ export class HomeComponentComponent {
   }
 
   ngOnInit(): void {
-    this.vehiculos = this.vehiculosService.vehiculo;
+    // this.vehiculos = this.vehiculosService.vehiculo;
+
+    this.vehiculosService.cargarVehiculos(); // Cargar vehículos desde Firebase  
+    this.vehiculosService.vehiculos$.subscribe((vehiculos) => {  
+      console.log('Vehículos desde el servicio:', vehiculos); // Imprime el resultado  
+      this.vehiculos = vehiculos; // Actualiza la lista de vehículos  
+    });
+    
   }
 
   guardar_vehiculo() {
@@ -73,5 +80,4 @@ export class HomeComponentComponent {
     this.vehiculos.splice(index, 1);
     console.log(`Vehículo en índice ${index} eliminado.`);
   }
-
 }
