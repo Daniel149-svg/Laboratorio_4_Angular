@@ -59,6 +59,4 @@ export class VehiculosProyectoComponent {
    this.cuadroValor = 0;
   }
 
-
-
 }

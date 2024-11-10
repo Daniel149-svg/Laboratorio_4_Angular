@@ -39,23 +39,22 @@ export class ActualizarComponentComponent implements OnInit {
     vehiculosService, private route: ActivatedRoute){    
 
   }
-  ngOnInit(): void {
-    this.indice = this.route.snapshot.params['id'];
-    let vehiculo: vehiculo = this.vehiculosService.encontar_vehiculo
-    (this.indice);
+ngOnInit(): void {
+  this.indice = this.route.snapshot.params['id'];
+  const vehiculo: vehiculo = this.vehiculosService.encontar_vehiculo(this.indice);
+  if (vehiculo) {
     this.cuadroMarca = vehiculo.marca;
     this.cuadroModelo = vehiculo.modelo;
-    this.cuadroNmotor= vehiculo.Nmotor;
-    this.cuadroColor= vehiculo.color;
-    this.cuadroTrasmicion= vehiculo.trasmicion;
+    this.cuadroNmotor = vehiculo.Nmotor;
+    this.cuadroColor = vehiculo.color;
+    this.cuadroTrasmicion = vehiculo.trasmicion;
     this.cuadroAnio = vehiculo.anio;
     this.cuadroValor = vehiculo.valor;
-
-
   }
+}
 
   actualizar_vehiculo(){
-    //if
+    
     let miVehiculo = new vehiculo(this.cuadroMarca, this.cuadroModelo, this.cuadroNmotor, this.cuadroColor, this.cuadroTrasmicion, this.cuadroAnio, this.cuadroValor);
 
    this.vehiculosService.actualizar_vehiculo(this.indice, miVehiculo);

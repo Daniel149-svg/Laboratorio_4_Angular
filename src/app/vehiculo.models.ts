@@ -6,6 +6,7 @@ export class vehiculo{
     trasmicion: string;
     anio: number;
     valor: number = 0;
+    id: any;
   
 
     constructor(
