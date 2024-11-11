@@ -57,9 +57,13 @@ export class HomeComponentComponent {
       this.cuadroAnio, 
       this.cuadroValor
     );
-
-    this.vehiculosService.agregar_vehiculo_servicio(miVehiculo);
-
+  
+    this.vehiculosService.agregar_vehiculo_servicio(miVehiculo).subscribe(() => {
+      // Volver a cargar la lista de vehículos después de agregar uno nuevo
+      this.vehiculosService.cargarVehiculos();
+    });
+  
+    // Limpiar los campos del formulario
     this.cuadroMarca = "";
     this.cuadroModelo = "";
     this.cuadroNmotor = "";
@@ -68,6 +72,7 @@ export class HomeComponentComponent {
     this.cuadroAnio = 0;
     this.cuadroValor = 0;
   }
+  
 
    // Función para actualizar un vehículo
    actualiza_vehiculo(index: number) {

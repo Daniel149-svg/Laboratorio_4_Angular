@@ -1,61 +1,63 @@
-      import { Injectable } from '@angular/core';
-      import { ServicioVehiculoService } from './servicio-vehiculo.service';
-      import { vehiculo } from './vehiculo.models';
-      import { DataService } from './data.service';
-      import { BehaviorSubject } from 'rxjs';
+import { Injectable } from '@angular/core';
+import { ServicioVehiculoService } from './servicio-vehiculo.service';
+import { vehiculo } from './vehiculo.models';
+import { DataService } from './data.service';
+import { BehaviorSubject, Observable, tap } from 'rxjs';
 
-      @Injectable({
-        providedIn: 'root'
+@Injectable({
+  providedIn: 'root'
+})
+export class vehiculosService {
+
+  private vehiculosSubject = new BehaviorSubject<vehiculo[]>([]);  
+    vehiculos$ = this.vehiculosSubject.asObservable();
+
+  vehiculos: vehiculo[]=[];
+
+  encontar_vehiculo(indice: any): vehiculo {
+    throw new Error('Method not implemented.');
+  }
+  eliminarVehiculo(vehiculoId: number) {
+    throw new Error('Method not implemented.');
+  }
+  vehiculo: vehiculo[] = [];
+
+  constructor(
+    private servicioMensaje: ServicioVehiculoService,
+    private dataService: DataService
+  ) {}
+
+  agregar_vehiculo_servicio(vehiculo: vehiculo): Observable<any> {
+    this.servicioMensaje.muestra_mensaje('Nombre Ingresado: ' + vehiculo.marca);
+    return this.dataService.agregarVehiculo(vehiculo).pipe(
+      tap((respuesta) => {
+        console.log('Vehículo agregado:', respuesta);
+        this.vehiculo.push(vehiculo);
       })
-      export class vehiculosService {
+    );
+  }
 
-        private vehiculosSubject = new BehaviorSubject<vehiculo[]>([]);  
-          vehiculos$ = this.vehiculosSubject.asObservable();
+  eliminar_vehiculo_servicio(indice: number) {
+    const vehiculoId = "eliminar"; 
+    this.dataService.eliminarVehiculo(vehiculoId).subscribe(() => {
+      this.vehiculo.splice(indice, 1);
+      console.log(`Vehículo en índice ${indice} eliminado.`);
+    });
+  }
 
-        vehiculos: vehiculo[]=[];
+  // Método para cargar los vehículos desde Firebase
+  cargarVehiculos() {  
+    this.dataService.obtenerVehiculos().subscribe((vehiculos) => {  
+      console.log('Vehículos desde Firebase:', vehiculos); // Agrega este console.log  
+      this.vehiculosSubject.next(vehiculos);  
+    });  
+  }
 
-        encontar_vehiculo(indice: any): vehiculo {
-          throw new Error('Method not implemented.');
-        }
-        eliminarVehiculo(vehiculoId: number) {
-          throw new Error('Method not implemented.');
-        }
-        vehiculo: vehiculo[] = [];
-
-        constructor(
-          private servicioMensaje: ServicioVehiculoService,
-          private dataService: DataService
-        ) {}
-
-        agregar_vehiculo_servicio(vehiculo: vehiculo) {
-          this.servicioMensaje.muestra_mensaje('Nombre Ingresado: ' + vehiculo.marca);
-          this.dataService.agregarVehiculo(vehiculo).subscribe((respuesta) => {
-            console.log('Vehículo agregado:', respuesta);
-            this.vehiculo.push(vehiculo);
-          });
-        }
-
-        eliminar_vehiculo_servicio(indice: number) {
-          const vehiculoId = "eliminar"; 
-          this.dataService.eliminarVehiculo(vehiculoId).subscribe(() => {
-            this.vehiculo.splice(indice, 1);
-            console.log(`Vehículo en índice ${indice} eliminado.`);
-          });
-        }
-
-        // Método para cargar los vehículos desde Firebase
-        cargarVehiculos() {  
-          this.dataService.obtenerVehiculos().subscribe((vehiculos) => {  
-            console.log('Vehículos desde Firebase:', vehiculos); // Agrega este console.log  
-            this.vehiculosSubject.next(vehiculos);  
-          });  
-        }
-
-        actualizar_vehiculo(indice: number, vehiculo: vehiculo) {
-          const vehiculoId = "actualizar"; 
-          this.dataService.actualizarVehiculo(vehiculoId, vehiculo).subscribe(() => {
-            console.log(`Vehículo en índice ${indice} actualizado en Firebase.`);
-            this.vehiculo[indice] = vehiculo;
-          });
-        }
-      }
+  actualizar_vehiculo(indice: number, vehiculo: vehiculo) {
+    const vehiculoId = "actualizar"; 
+    this.dataService.actualizarVehiculo(vehiculoId, vehiculo).subscribe(() => {
+      console.log(`Vehículo en índice ${indice} actualizado en Firebase.`);
+      this.vehiculo[indice] = vehiculo;
+    });
+  }
+}
