@@ -1,66 +1,67 @@
-<div class="container">
-    <div class="col">
-        <h1>{{titulo}}</h1>
-    </div><br>
-    
-    <form class="form-group row" (ngSubmit)="guardar_vehiculo()">
-        <div class="form-group col-md-3">
-            <label for="marca">
-                <i class="bi bi-truck"></i> Marca del Vehículo:
-            </label>
-            <input type="text" name="marca" id="marca" placeholder="Ingrese la marca del vehículo" class="form-control" [(ngModel)]="cuadroMarca">
-        </div>
-        
-        <div class="form-group col-md-3">
-            <label for="modelo">
-                <i class="bi bi-car-front"></i> Modelo del Vehículo:
-            </label>
-            <input type="text" name="modelo" id="modelo" placeholder="Ingrese el modelo del vehículo" class="form-control" [(ngModel)]="cuadroModelo">
-        </div>
-        
-        <div class="form-group col-md-3">
-            <label for="Nmotor">
-                <i class="bi bi-gear"></i> N° de Motor:
-            </label>
-            <input type="text" name="Nmotor" id="Nmotor" placeholder="Digite el número de motor" class="form-control" [(ngModel)]="cuadroNmotor">
-        </div>
-        
-        <div class="form-group col-md-3">
-            <label for="color">
-                <i class="bi bi-palette"></i> Color del Vehículo:
-            </label>
-            <input type="text" name="color" id="color" placeholder="Ingrese el color del vehículo" class="form-control" [(ngModel)]="cuadroColor">
-        </div>
-        
-        <div class="form-group col-md-3">
-            <label for="trasmicion">
-                <i class="bi bi-arrow-repeat"></i> Transmisión del Vehículo:
-            </label>
-            <input type="text" name="trasmicion" id="trasmicion" placeholder="Ingrese la transmisión" class="form-control" [(ngModel)]="cuadroTrasmicion">
-        </div>
-        
-        <div class="form-group col-md-3">
-            <label for="anio">
-                <i class="bi bi-calendar"></i> Año del Vehículo:
-            </label>
-            <input type="number" name="anio" id="anio" placeholder="Ingrese el año del vehículo" class="form-control" [(ngModel)]="cuadroAnio">
-        </div>
-        
-        <div class="form-group col-md-3">
-            <label for="valor">
-                <i class="bi bi-currency-dollar"></i> Valor del Vehículo:
-            </label>
-            <input type="number" name="valor" id="valor" placeholder="Digite el valor del vehículo" class="form-control" [(ngModel)]="cuadroValor">
-        </div>
-        
-        <div class="form-group col-md-3 d-flex align-items-end">
-            <button type="submit" class="btn btn-primary w-100">
-                <i class="bi bi-save"></i> Guardar Vehículo
-            </button>
-        </div>
-    </form>
-</div>
+<div class="p-4" id="formulario-vehiculo">
+    <div class="text-center mb-5">
+        <h1 class="animated-title">{{titulo}}</h1>
+        <p class="animated-subtitle">
+            Completa la información para registrar un nuevo vehículo.
+        </p>
+    </div>
 
-<app-vehiculo-hijo *ngFor="let vehiculo of vehiculos; let i = index" [vehiculoLista]="vehiculo" [indice]="i"></app-vehiculo-hijo>
+        
+        <form class="form-group row">
+            <div class="form-group col-md-3">
+                <label for="marca">
+                    <i class="bi bi-truck"></i> Marca del Vehículo:
+                </label>
+                <input type="text" name="marca" id="marca" placeholder="Ingrese la marca del vehículo" class="form-control" [(ngModel)]="cuadroMarca">
+            </div>
+            
+            <div class="form-group col-md-3">
+                <label for="modelo">
+                    <i class="bi bi-car-front"></i> Modelo del Vehículo:
+                </label>
+                <input type="text" name="modelo" id="modelo" placeholder="Ingrese el modelo del vehículo" class="form-control" [(ngModel)]="cuadroModelo">
+            </div>
+            
+            <div class="form-group col-md-3">
+                <label for="Nmotor">
+                    <i class="bi bi-gear"></i> N° de Motor:
+                </label>
+                <input type="text" name="Nmotor" id="Nmotor" placeholder="Digite el número de motor" class="form-control" [(ngModel)]="cuadroNmotor">
+            </div>
+            
+            <div class="form-group col-md-3">
+                <label for="color">
+                    <i class="bi bi-palette"></i> Color del Vehículo:
+                </label>
+                <input type="text" name="color" id="color" placeholder="Ingrese el color del vehículo" class="form-control" [(ngModel)]="cuadroColor">
+            </div>
+            
+            <div class="form-group col-md-3">
+                <label for="trasmicion">
+                    <i class="bi bi-arrow-repeat"></i> Transmisión del Vehículo:
+                </label>
+                <input type="text" name="trasmicion" id="trasmicion" placeholder="Ingrese la transmisión" class="form-control" [(ngModel)]="cuadroTrasmicion">
+            </div>
+            
+            <div class="form-group col-md-3">
+                <label for="anio">
+                    <i class="bi bi-calendar"></i> Año del Vehículo:
+                </label>
+                <input type="number" name="anio" id="anio" placeholder="Ingrese el año del vehículo" class="form-control" [(ngModel)]="cuadroAnio">
+            </div>
+            
+            <div class="form-group col-md-3">
+                <label for="valor">
+                    <i class="bi bi-currency-dollar"></i> Valor del Vehículo:
+                </label>
+                <input type="number" name="valor" id="valor" placeholder="Digite el valor del vehículo" class="form-control" [(ngModel)]="cuadroValor">
+            </div>
+            <div class="form-group col-md-3 d-flex align-items-end">
+                <button type="submit" class="btn btn-primary w-100" (click)="guardar_vehiculo()">Guardar vehiculo</button>
+            </div>
+        </form>
+    </div>
 
-<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+    <app-vehiculo-hijo *ngFor="let vehiculo of vehiculos; let i = index" [vehiculoLista]="vehiculo" [indice]="i"></app-vehiculo-hijo>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">

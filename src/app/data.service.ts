@@ -1,42 +1,45 @@
-      import { Injectable } from '@angular/core';
-      import { HttpClient } from '@angular/common/http';
-      import { vehiculo } from './vehiculo.models';
-      import { map, Observable } from 'rxjs';
+import { HttpClient } from "@angular/common/http";
+import { Injectable } from "@angular/core";
+import { vehiculo } from "./vehiculo.models";
 
-      @Injectable({
-        providedIn: 'root',
-      })
+@Injectable({
+    providedIn: 'root'
+})
+export class DataServices {
+    private baseUrl = 'https://daniel-trujillo-ing-default-rtdb.firebaseio.com/navidad';
 
-      export class DataService {
-        private url = 'https://daniel-trujillo-ing-default-rtdb.firebaseio.com/navidad.json';
-        httpClient: any;
+    constructor(private httpClient: HttpClient) {}
 
-        constructor(private http: HttpClient) {}
+    guardar_arreglo(vehiculo: vehiculo[]) {
+        // Corregir la URL eliminando el doble slash
+        this.httpClient.put(`${this.baseUrl}.json`, vehiculo).subscribe(
+            response => console.log("Se han guardado los cambios en firebase"),
+            error => console.log('Error: ' + error)
+        );
+    }
 
-        // metodo para agregar un nuevo registro
-        
-        agregarVehiculo(vehiculo: vehiculo): Observable<any> {
-          return this.http.post(this.url, vehiculo);
-        }
+    cargar_arreglo() {
+        // Corregir la URL eliminando el doble slash
+        return this.httpClient.get(`${this.baseUrl}.json`);
+    }
 
-        // metodo para obtener todos los vehiculo
+    actualizar_posicion(indice: number, vehiculo: vehiculo) {
+        // Corregir la URL eliminando el doble slash
+        let url = `${this.baseUrl}/${indice}.json`;
 
-        obtenerVehiculos(): Observable<vehiculo[]> {  
-          return this.http.get<vehiculo[]>(this.url).pipe(  
-            map((data) => Object.values(data))
-          );  
-        }
+        this.httpClient.put(url, vehiculo).subscribe(
+            response => console.log("Se ha actualizado el vehiculo " + response),
+            error => console.log("Error: " + error)
+        );
+    }
 
-        // metodo para actualizar un vehiculo
+    eliminar_posicion(indice: number) {
+        // Corregir la URL eliminando el doble slash
+        let url = `${this.baseUrl}/${indice}.json`;
 
-        actualizarVehiculo(id: string, vehiculo: vehiculo): Observable<any> {
-          return this.http.put(`${this.url}/${id}.json`, vehiculo);
-        }
-
-        // metodo para eliminar un vehiculo
-
-        eliminarVehiculo(id: string): Observable<any> {
-          return this.http.delete(`${this.url}/${id}.json`);
-        }
-
-      }
+        this.httpClient.delete(url).subscribe(
+            response => console.log("Se ha eliminado el vehiculo " + response),
+            error => console.log("Error: " + error)
+        );
+    }
+}

@@ -7,18 +7,17 @@ import { vehiculosService } from '../vehiculos.service';
   standalone: true,
   imports: [],
   templateUrl: './eliminar.component.html',
-  styleUrl: './eliminar.component.css'
+  styleUrls: ['./eliminar.component.css']
 })
-export class EliminarComponent implements OnInit{
+export class EliminarComponent implements OnInit {
 
   vehiculoId: number = 0;
-
 
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private vehiculoService : vehiculosService
-  ) {}
+    private vehiculoService: vehiculosService
+  ) { }
 
   ngOnInit(): void {
     this.route.params.subscribe(params => {
@@ -28,11 +27,10 @@ export class EliminarComponent implements OnInit{
 
   eliminarVehiculo(): void {
     this.vehiculoService.eliminarVehiculo(this.vehiculoId);
-    this.router.navigate(['/']); 
+    this.router.navigate(['/']); // Navegar de regreso al listado después de la eliminación
   }
 
   cancelar(): void {
-    this.router.navigate(['/']); 
+    this.router.navigate(['/']); // Navegar de regreso al listado sin eliminar
   }
-
 }

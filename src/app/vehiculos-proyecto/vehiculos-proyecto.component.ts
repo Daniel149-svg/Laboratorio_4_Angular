@@ -38,7 +38,7 @@ export class VehiculosProyectoComponent {
 
   }
   ngOnInit(): void {
-    this.vehiculos = this.vehiculosService.vehiculo;
+    this.vehiculos = this.vehiculosService.vehiculos;
   }
 
   guardar_vehiculo(){
@@ -48,8 +48,6 @@ export class VehiculosProyectoComponent {
    this.vehiculosService.agregar_vehiculo_servicio(miVehiculo);
 
    this.router.navigate(['']);
-  
-
    this.cuadroMarca = "";
    this.cuadroModelo = "";
    this.cuadroNmotor = "";
@@ -58,5 +56,7 @@ export class VehiculosProyectoComponent {
    this.cuadroAnio = 0;
    this.cuadroValor = 0;
   }
+
+
 
 }

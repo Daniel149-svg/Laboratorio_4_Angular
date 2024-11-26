@@ -1,0 +1,65 @@
+/* Contenedor general */
+#formulario-vehiculo {
+    background: linear-gradient(135deg, #ffffff, #ffffff);
+    padding: 2rem;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    animation: fadeIn 1.5s ease-in-out;
+    color: #070404; /* Texto blanco por defecto */
+}
+
+/* Animación del título */
+.animated-title {
+    font-size: 2.5rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    color: #100909;
+    text-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+    opacity: 0;
+    transform: translateY(-20px);
+    animation: slideInTitle 1.5s ease-out forwards;
+}
+
+/* Animación del subtítulo */
+.animated-subtitle {
+    font-size: 1.2rem;
+    color: #150b0e; /* Texto de subtítulo con contraste */
+    opacity: 0;
+    transform: translateY(20px);
+    animation: slideInSubtitle 1.5s ease-out 0.5s forwards;
+}
+
+/* Efecto de aparición */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+/* Animación del título */
+@keyframes slideInTitle {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Animación del subtítulo */
+@keyframes slideInSubtitle {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}

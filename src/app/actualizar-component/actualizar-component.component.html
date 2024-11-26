@@ -2,7 +2,7 @@
   <div class="col">
     <h1>{{titulo}}</h1>
   </div><br>
-  <form class="form-group row" (ngSubmit)="actualizar_vehiculo()">
+  <form class="form-group row" (ngSubmit)="accion_vehiculo()">
     <div class="form-group col-md-3">
       <label for="marca">Marca del Vehiculo:</label>
       <input type="text" name="marca" id="marca" placeholder="Ingrese la marca del vehiculo" class="form-control" [(ngModel)]="cuadroMarca">
@@ -36,3 +36,4 @@
     </div>
   </form>
 </div>
+

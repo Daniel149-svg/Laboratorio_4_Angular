@@ -17,6 +17,7 @@ import { vehiculosService } from '../vehiculos.service';
 
 export class ActualizarComponentComponent implements OnInit {
   indice: any;
+  accion!: number;
 
   volverHome(){
     this.router.navigate(['']);
@@ -34,15 +35,16 @@ export class ActualizarComponentComponent implements OnInit {
   cuadroTrasmicion: string = "";
   cuadroAnio: number = 0;
   cuadroValor: number = 0;
+ 
 
-  constructor(private router: Router, private vehiculosService:
-    vehiculosService, private route: ActivatedRoute){    
-
+  constructor(private router: Router, private vehiculosService: vehiculosService, private route: ActivatedRoute){
+    //this.empleados = this.empleadosService.empleados;
   }
+
   ngOnInit(): void {
+    this.accion = parseInt(this.route.snapshot.queryParams['accion']);
     this.indice = this.route.snapshot.params['id'];
-    let vehiculo: vehiculo = this.vehiculosService.encontar_vehiculo
-    (this.indice);
+    let vehiculo: vehiculo = this.vehiculosService.encontar_vehiculo(this.indice);
     this.cuadroMarca = vehiculo.marca;
     this.cuadroModelo = vehiculo.modelo;
     this.cuadroNmotor= vehiculo.Nmotor;
@@ -50,26 +52,22 @@ export class ActualizarComponentComponent implements OnInit {
     this.cuadroTrasmicion= vehiculo.trasmicion;
     this.cuadroAnio = vehiculo.anio;
     this.cuadroValor = vehiculo.valor;
-
-
   }
 
-  actualizar_vehiculo(){
-    //if
-    let miVehiculo = new vehiculo(this.cuadroMarca, this.cuadroModelo, this.cuadroNmotor, this.cuadroColor, this.cuadroTrasmicion, this.cuadroAnio, this.cuadroValor);
 
-   this.vehiculosService.actualizar_vehiculo(this.indice, miVehiculo);
+  accion_vehiculo(){
+    if(this.accion == 1){
+      let miVehiculo = new vehiculo(this.cuadroMarca, this.cuadroModelo, this.cuadroNmotor, this.cuadroColor, this.cuadroTrasmicion, this.cuadroAnio, this.cuadroValor);
+      this.vehiculosService.actualizar_vehiculo(this.indice, miVehiculo);
+    }else{
+      this.vehiculosService.eliminarVehiculo(this.indice);
+    }
 
-   this.router.navigate(['']);
-  
+    setTimeout(() => {
+      this.router.navigate(['']);
+      
+    }, 500);
 
-   this.cuadroMarca = "";
-   this.cuadroModelo = "";
-   this.cuadroNmotor = "";
-   this.cuadroColor = "";
-   this.cuadroTrasmicion = "";
-   this.cuadroAnio = 0;
-   this.cuadroValor = 0;
   }
   
  }
