@@ -13,7 +13,8 @@ export class DataServices {
 
     guardar_arreglo(vehiculo: vehiculo[]) {
         // Corregir la URL eliminando el doble slash
-        this.httpClient.put(`${this.baseUrl}.json`, vehiculo).subscribe(
+        const token = this.loginService.getIdToken();
+        this.httpClient.put(`${this.baseUrl}.json?auth=${token}`, vehiculo).subscribe(
             response => console.log("Se han guardado los cambios en firebase"),
             error => console.log('Error: ' + error)
         );
@@ -27,14 +28,21 @@ export class DataServices {
 
     actualizar_posicion(indice: number, vehiculo: vehiculo) {
         const token = this.loginService.getIdToken();
+        console.log(token)
         let url = `${this.baseUrl}/${indice}.json?auth=${token}`;
-        return this.httpClient.put(url, vehiculo);
+        this.httpClient.put(url, vehiculo).subscribe(
+            response => console.log("Se han guardado los cambios en firebase"),
+            error => console.log('Error: ' + error)
+        );;
     }
     
     eliminar_posicion(indice: number) {
         const token = this.loginService.getIdToken();
         let url = `${this.baseUrl}/${indice}.json?auth=${token}`;
-        return this.httpClient.delete(url);
+        this.httpClient.delete(url).subscribe(
+            response => console.log("Se han guardado los cambios en firebase"),
+            error => console.log('Error: ' + error)
+        );;
     }
     
 }
