@@ -1,0 +1,87 @@
+/* Ajustes para el contenedor */
+.container {
+    max-width: 700px; /* Incrementar tamaño */
+}
+
+/* Estilo de la tarjeta */
+.card {
+    background-color: #ffffff;
+    border-radius: 15px; /* Bordes más redondeados */
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1); /* Sombra más profunda */
+    padding: 40px;
+    transform: translateY(-10px); /* Desplazamiento inicial para el efecto de movimiento */
+    transition: all 0.3s ease-in-out; /* Transición suave */
+}
+
+/* Efecto cuando la tarjeta se pasa por encima */
+.card:hover {
+    transform: translateY(-15px); /* Movimiento hacia arriba */
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2); /* Aumenta la sombra en hover */
+}
+
+/* Título */
+h3 {
+    font-size: 28px; /* Título más grande */
+    font-weight: bold;
+    color: #333;
+}
+
+/* Estilo de las etiquetas */
+label {
+    font-size: 18px; /* Aumentar tamaño de la fuente */
+    color: #555;
+}
+
+/* Estilo de los inputs */
+.form-group {
+    margin-bottom: 2rem;
+}
+
+input.form-control {
+    border-radius: 8px; /* Bordes redondeados */
+    box-shadow: none;
+    font-size: 18px; /* Mayor tamaño de texto */
+    transition: all 0.3s ease; /* Transición suave */
+}
+
+input.form-control:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 10px rgba(0, 123, 255, 0.5); /* Efecto de foco más fuerte */
+}
+
+/* Botón */
+.btn-primary {
+    background-color: #007bff;
+    border-color: #007bff;
+    padding: 15px;
+    font-size: 18px; /* Aumentar tamaño */
+    border-radius: 8px;
+    transition: all 0.3s ease;
+}
+
+.btn-primary:hover {
+    background-color: #0056b3;
+    border-color: #004085;
+    transform: translateY(-3px); /* Movimiento hacia arriba en hover */
+}
+
+/* Botón completo */
+.btn-block {
+    width: 100%;
+}
+
+/* Animación de entrada para la tarjeta */
+[data-aos="fade-up"] {
+    animation: fadeUp 0.6s ease-out forwards;
+}
+
+@keyframes fadeUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}

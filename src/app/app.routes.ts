@@ -5,14 +5,17 @@ import { VehiculosProyectoComponent } from './vehiculos-proyecto/vehiculos-proye
 import { ContactoVehiculoComponent } from './contacto-vehiculo/contacto-vehiculo.component';
 import { ErrorComponentComponent } from './error-component/error-component.component';
 import { EliminarComponent } from './eliminar/eliminar.component';
+import { LoginComponent } from './login/login.component';
+import { LoginGuardian } from './login/login-guardian';
+
 
 export const routes: Routes = [
-    {path: "", component: HomeComponentComponent},
-
-    { path: 'actualiza/:id', component: ActualizarComponentComponent},
-    { path: "vehiculos", component: VehiculosProyectoComponent},
-    {path: "contactanos", component: ContactoVehiculoComponent},
-    { path: 'eliminar/:id', component: EliminarComponent },
-    {path: "**", component: ErrorComponentComponent},
-
+  { path: '', component: LoginComponent }, 
+  { path: 'home', component: HomeComponentComponent, canActivate: [LoginGuardian] },  
+  { path: 'actualiza/:id', component: ActualizarComponentComponent, canActivate: [LoginGuardian] },  
+  { path: 'vehiculos', component: VehiculosProyectoComponent, canActivate: [LoginGuardian] }, 
+  { path: 'contactanos', component: ContactoVehiculoComponent },
+  { path: 'eliminar/:id', component: EliminarComponent, canActivate: [LoginGuardian] }, 
+  { path: 'login', component: LoginComponent },
+  { path: '**', component: ErrorComponentComponent },
 ];

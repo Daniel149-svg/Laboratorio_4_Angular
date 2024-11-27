@@ -3,11 +3,13 @@ import { CaracteristicasVehiculoComponent } from "../caracteristicas-vehiculo/ca
 import { vehiculo } from '../vehiculo.models';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
+import { LoginService } from '../login/login.service';
 
 @Component({
   selector: 'app-vehiculo-hijo',
   standalone: true,
   imports: [CaracteristicasVehiculoComponent, CommonModule, RouterModule],
+  providers: [LoginService],
   templateUrl: './vehiculo-hijo.component.html',
   styleUrl: './vehiculo-hijo.component.css'
 })

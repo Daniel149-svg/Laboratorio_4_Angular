@@ -7,12 +7,13 @@ import Swal from 'sweetalert2';
 
 import { vehiculo } from '../vehiculo.models';
 import { VehiculoHijoComponent } from "../vehiculo-hijo/vehiculo-hijo.component";
+import { LoginComponent } from '../login/login.component';
 
 @Component({
   selector: 'app-home-component',
   standalone: true,
   imports: [CommonModule, FormsModule, VehiculoHijoComponent],
-  providers: [ServicioVehiculoService],
+  providers: [ServicioVehiculoService, LoginComponent],
   templateUrl: './home-component.component.html',
   styleUrl: './home-component.component.css'
 })
@@ -40,18 +41,13 @@ export class HomeComponentComponent implements OnInit{
   ngOnInit(): void {
     this.vehiculosService.obtener_vehiculo().subscribe(
         misVehiculos => {
-            if (misVehiculos) {
+            if (misVehiculos) 
                 console.log(misVehiculos);
                 this.vehiculos = Object.values(misVehiculos);
                 this.vehiculosService.set_vehiculo(this.vehiculos);
-            } else {
-                console.warn('No se obtuvieron vehículos');
-                this.vehiculos = [];
-            }
+            
         },
-        error => {
-            console.error('Error al obtener vehículos:', error);
-        }
+       
     );
 }
 
