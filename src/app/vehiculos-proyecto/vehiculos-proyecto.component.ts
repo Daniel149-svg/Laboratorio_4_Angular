@@ -16,7 +16,7 @@ import { vehiculosService } from '../vehiculos.service'
 export class VehiculosProyectoComponent {
 
   volverHome(){
-    this.router.navigate(['']);
+    this.router.navigate(['/home']);
   
 
   }
@@ -47,7 +47,7 @@ export class VehiculosProyectoComponent {
 
    this.vehiculosService.agregar_vehiculo_servicio(miVehiculo);
 
-   this.router.navigate(['']);
+   this.router.navigate(['/home']);
    this.cuadroMarca = "";
    this.cuadroModelo = "";
    this.cuadroNmotor = "";

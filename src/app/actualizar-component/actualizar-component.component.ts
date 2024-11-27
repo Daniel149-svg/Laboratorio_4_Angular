@@ -9,7 +9,7 @@ import { LoginService } from '../login/login.service'; // Asegúrate de importar
   selector: 'app-actualizar-component',
   standalone: true,
   imports: [FormsModule],
-  providers: [],
+  providers: [LoginService],
   templateUrl: './actualizar-component.component.html',
   styleUrls: ['./actualizar-component.component.css']
 })
@@ -77,7 +77,7 @@ export class ActualizarComponentComponent implements OnInit {
     }
 
     setTimeout(() => {
-      this.router.navigate(['']);
+      this.router.navigate(['/home']);
     }, 500);
   }
 }

@@ -27,10 +27,10 @@ export class EliminarComponent implements OnInit {
 
   eliminarVehiculo(): void {
     this.vehiculoService.eliminarVehiculo(this.vehiculoId);
-    this.router.navigate(['/']); // Navegar de regreso al listado después de la eliminación
+    this.router.navigate(['/home']); // Navegar de regreso al listado después de la eliminación
   }
 
   cancelar(): void {
-    this.router.navigate(['/']); // Navegar de regreso al listado sin eliminar
+    this.router.navigate(['/home']); // Navegar de regreso al listado sin eliminar
   }
 }
