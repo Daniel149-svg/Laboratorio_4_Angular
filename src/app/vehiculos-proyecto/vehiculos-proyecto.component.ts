@@ -4,12 +4,13 @@ import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 
 import { vehiculosService } from '../vehiculos.service'
+import { LoginService } from '../login/login.service';
 
 @Component({
   selector: 'app-vehiculos-proyecto',
   standalone: true,
   imports: [FormsModule],
-  providers: [Router],
+  providers: [Router, LoginService],
   templateUrl: './vehiculos-proyecto.component.html',
   styleUrl: './vehiculos-proyecto.component.css'
 })

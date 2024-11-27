@@ -19,7 +19,7 @@ export class ActualizarComponentComponent implements OnInit {
   accion!: number;
 
   volverHome() {
-    this.router.navigate(['']);
+    this.router.navigate(['/home']);
   }
 
   titulo = 'Actualizar Vehiculo';

@@ -21,7 +21,13 @@ export class AppComponent implements OnInit {
   ngOnInit(): void {
     firebase.initializeApp({
       apiKey: "AIzaSyCiZbMhIyzhEuKsAXaLnfRQwvg6jKwFlLA",
-      authDomain: "daniel-trujillo-ing.firebaseapp.com"
+      authDomain: "daniel-trujillo-ing.firebaseapp.com",
+      databaseURL: "https://daniel-trujillo-ing-default-rtdb.firebaseio.com",
+      projectId: "daniel-trujillo-ing",
+      storageBucket: "daniel-trujillo-ing.firebasestorage.app",
+      messagingSenderId: "234474060127",
+      appId: "1:234474060127:web:9b125a8985b25ca6c45eea",
+      measurementId: "G-N9LP3HVR87"
     });
   }
 
@@ -32,4 +38,4 @@ export class AppComponent implements OnInit {
   logout(){
     this.loginService.logout();
   }
-}
+} 
