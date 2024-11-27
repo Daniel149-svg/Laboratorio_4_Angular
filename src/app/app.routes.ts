@@ -10,7 +10,7 @@ import { LoginGuardian } from './login/login-guardian';
 
 
 export const routes: Routes = [
-  { path: '', component: LoginComponent }, 
+   
   { path: 'home', component: HomeComponentComponent, canActivate: [LoginGuardian] },  
   { path: 'actualiza/:id', component: ActualizarComponentComponent, canActivate: [LoginGuardian] },  
   { path: 'vehiculos', component: VehiculosProyectoComponent, canActivate: [LoginGuardian] }, 

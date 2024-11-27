@@ -10,7 +10,7 @@ import { LoginService } from '../login/login.service';
   selector: 'app-vehiculos-proyecto',
   standalone: true,
   imports: [FormsModule],
-  providers: [Router, LoginService],
+  providers: [Router],
   templateUrl: './vehiculos-proyecto.component.html',
   styleUrl: './vehiculos-proyecto.component.css'
 })

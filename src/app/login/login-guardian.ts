@@ -11,17 +11,17 @@ export class LoginGuardian implements CanActivate {
 
   constructor(private loginService: LoginService, private router: Router) {}
 
-  canActivate(
-    next: ActivatedRouteSnapshot,
-    state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
+  canActivate(){
     
     // Si el usuario no esta logueado, redirige al login
     if (!this.loginService.estaLogueado()) {
       this.router.navigate(['/login']);
       return false;  // No permite el acceso
+    } else {
+      return true;
     }
+    
 
     // Si el usuario esta logueado, permite el acceso
-    return true;
   }
 }

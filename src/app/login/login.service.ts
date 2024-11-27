@@ -31,13 +31,13 @@ export class LoginService {
     }
 
     estaLogueado() {
-        return !!this.cookies.get('token');  // Si el token existe, el usuario está logueado
+        return this.cookies.get('token');  // Si el token existe, el usuario está logueado
     }
 
     logout() {
         firebase.auth().signOut().then(() => {
             this.token = "";
-            this.cookies.delete('token');  // Eliminar el token de las cookies
+            //this.cookies.delete('token');  // Eliminar el token de las cookies
             this.router.navigate(['/login']);  // Redirigir al login
         });
     }
